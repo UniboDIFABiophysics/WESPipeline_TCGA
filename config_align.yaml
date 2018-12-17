@@ -1,0 +1,77 @@
+
+
+
+# relative path from 'home'
+snakefile: 'WESPipeline2/snakefile_align_02.py'
+conda: 'WESPipeline2/envs/'
+scripts: 'scripts/'
+process_path: 'ANALYSES_WES/'
+
+# absolute path
+store_path: '/mnt/stor-rw/users/eugenio_wes/'
+
+outfolder: '180910_align'
+
+# FOR snakefile_align:
+# it must be a list of sample id
+input_list: 'RUN/180910_align/02_input_list.tsv'
+
+dataset: 'data_ref_02/20180911_dataset.tsv'
+
+cores: '27'
+disk: '1'
+cpu_type: 'NA'
+n_sim: '1'
+n_cpu: '1'
+threads: 27
+
+map_thrs: 4
+RT_thrs: 4
+BaseRecal_thrs: 4
+PrintReads_thrs: 4
+
+keepgoing: True
+
+adapters: True
+# this is nextera transposase 2 rerverse complement
+adapter_sequence_1: 'CTGTCTCTTATACACATCTCCGAGCCCACGAGAC'
+# this is nextera transposase 1
+adapter_sequence_2: 'TCGTCGGCAGCGTCAGATGTGTATAAGAGACAG'
+
+adapter_removal_minquality: '20'
+adapter_removal_minlength: '57'
+
+
+fasta:
+  MT: 'data_ref_02/MT.fasta'
+  genome: 'data_ref_02/human_g1k_v37.fasta'
+  nextera: 'data_ref_02/nextera.fasta'
+  nextera_expanded: 'data_ref_02/nextera_expanded.fasta'
+  truseq: 'data_ref_02/truseq.fasta'
+  truseq_rapid: 'data_ref_02/truseq_rapid.fasta'
+  nextera_dna_exome: 'data_ref_02/nextera_dna_exome.fasta'
+
+bed:
+  MT: 'data_ref_02/MT'
+  nextera: 'data_ref_02/nexterarapidcapture_exome_targetedregions_v1.2'
+  nextera_expanded: 'data_ref_02/nexterarapidcapture_expandedexome_targetedregions'
+  truseq: 'data_ref_02/truseq-exome-targeted-regions-manifest-v1-2'
+  truseq_rapid: 'data_ref_02/truseq-rapid-exome-targeted-regions-manifest-v1-2'
+  nextera_dna_exome: 'data_ref_02/nextera-dna-exome-targeted-regions-manifest-v1-2'
+
+
+ref-files:
+    ## For IndelRealigner
+    indels_ref: 'data_ref_02/Mills_and_1000G_gold_standard.indels.b37.vcf' # The current best set of known indels to be used for local realignment
+    dbsnp: 'data_ref_02/dbsnp_138.b37.vcf' # SNPs database
+
+folders:
+    softwares: 'softwares/'
+
+softwares:
+    gatk: 'softwares/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar'
+    adapter_removal: 'softwares/adapter_removal_1.5.4/AdapterRemoval'
+    picard: 'softwares/picard-tools-1.119/'
+
+sample-details:
+    platform: 'illumina' # Set platform for mapping

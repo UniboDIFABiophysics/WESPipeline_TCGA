@@ -1,0 +1,12 @@
+
+channels:
+  - bioconda
+  - cyclus
+  - conda-forge
+  - r
+dependencies:
+ - fastqc
+ - bwa = 0.7.12
+ - samtools = 1.5
+ - java-jdk = 8.45.14
+ - bedtools = 2.26
